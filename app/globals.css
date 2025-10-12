@@ -1,0 +1,41 @@
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: #ffffff;
+  color: #171717;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* CUSTOM STILOVI ZA FOOTER I HEADER */
+.footer-link {
+  @apply transition-all duration-300 transform;
+}
+
+.footer-link:hover {
+  @apply scale-105;
+}
+
+.social-icon {
+  @apply transition-all duration-300 transform;
+}
+
+.social-icon:hover {
+  transform: scale(1.1) translateY(-2px);
+}
+
+/* Animacije za header navigaciju */
+.nav-link {
+  @apply relative transition-colors duration-300;
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300;
+}
+
+.nav-link:hover::after {
+  @apply w-full;
+}
