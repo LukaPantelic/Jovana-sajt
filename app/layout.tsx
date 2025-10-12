@@ -1,12 +1,13 @@
 // app/layout.tsx
 import type { Metadata } from 'next'
 import './globals.css'
+import { LanguageProvider } from './contexts/LanguageContext'
 import Header from './src/components/Header/Header'
 import Footer from './src/components/Footer/Footer'
 
 export const metadata: Metadata = {
-  title: 'Jolline digitalart - Profesionalna fotografija',
-  description: 'Jolline digitalart - Profesionalna fotografija',
+  title: 'Fotograf - Profesionalna fotografija',
+  description: 'Portfolio profesionalnog fotografa',
 }
 
 export default function RootLayout({
@@ -17,9 +18,11 @@ export default function RootLayout({
   return (
     <html lang="sr">
       <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <LanguageProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   )

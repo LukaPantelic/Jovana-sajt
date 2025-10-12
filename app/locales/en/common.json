@@ -1,0 +1,32 @@
+{
+  "nav": {
+    "home": "Home",
+    "gallery": "Gallery",
+    "about": "About Me", 
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Capture Moments",
+    "subtitle": "Create Memories That Last Forever",
+    "description": "Professional photography for all your special moments. Portraits, weddings, family sessions and much more.",
+    "galleryBtn": "View Gallery",
+    "contactBtn": "Contact Me"
+  },
+  "footer": {
+    "brand": "Photographer",
+    "description": "Professional photography that captures the essence of the moment. Specialized in weddings, portraits and natural scenery.",
+    "quickContact": "Quick Contact",
+    "callUs": "Call Us",
+    "sendEmail": "Send Email",
+    "location": "Location",
+    "workingHours": "Working Hours",
+    "weekdays": "Monday - Friday",
+    "saturday": "Saturday", 
+    "sunday": "Sunday",
+    "emergency": "Emergency appointments available upon request",
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "sitemap": "Sitemap"
+  }
+}
