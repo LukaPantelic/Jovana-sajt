@@ -2,14 +2,14 @@
 'use client'
 
 import { useLanguage } from '@/app/contexts/LanguageContext'
-import { 
-  FaInstagram, 
-  FaFacebook, 
-  FaTwitter, 
-  FaLinkedin, 
-  FaPhone, 
-  FaEnvelope, 
-  FaMapMarkerAlt 
+import {
+  FaInstagram,
+  FaFacebook,
+  FaTwitter,
+  FaLinkedin,
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt
 } from 'react-icons/fa'
 
 export default function Footer() {
@@ -54,19 +54,19 @@ export default function Footer() {
     <footer className="bg-gray-900 text-white">
       {/* Glavni deo footera */}
       <div className="container mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
           
-          {/* Brand sekcija */}
-          <div className="lg:col-span-2">
+          {/* LEVI DEO - Brand sekcija (centrirana) */}
+          <div className="text-center lg:text-left lg:flex-1 max-w-lg">
             <h3 className="text-2xl font-bold mb-4">
               {t('footer.brand')}
             </h3>
-            <p className="text-gray-300 mb-6 max-w-md">
+            <p className="text-gray-300 mb-6">
               {t('footer.description')}
             </p>
-            
-            {/* Društvene mreže */}
-            <div className="flex space-x-4">
+
+            {/* Društvene mreže - centrirane na mobilnim, levo na desktopu */}
+            <div className="flex justify-center lg:justify-start space-x-4">
               {socialLinks.map((social) => {
                 const IconComponent = social.icon
                 return (
@@ -85,8 +85,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Brzi kontakt */}
-          <div>
+          {/* DESNI DEO - Brzi kontakt (centriran) */}
+          <div className="text-center lg:text-left lg:flex-1 max-w-md">
             <h4 className="text-lg font-semibold mb-6">
               {t('footer.quickContact')}
             </h4>
@@ -94,7 +94,7 @@ export default function Footer() {
               {/* Telefon */}
               <button
                 onClick={handlePhoneClick}
-                className="transition-all duration-300 transform hover:scale-105 flex items-center space-x-3 text-gray-300 hover:text-white w-full text-left"
+                className="transition-all duration-300 transform hover:scale-105 flex items-center space-x-3 text-gray-300 hover:text-white w-full text-left justify-center lg:justify-start"
               >
                 <div className="bg-blue-600 p-2 rounded-full transition-colors duration-300 group-hover:bg-blue-700">
                   <FaPhone size={16} />
@@ -108,7 +108,7 @@ export default function Footer() {
               {/* Email */}
               <button
                 onClick={handleEmailClick}
-                className="transition-all duration-300 transform hover:scale-105 flex items-center space-x-3 text-gray-300 hover:text-white w-full text-left"
+                className="transition-all duration-300 transform hover:scale-105 flex items-center space-x-3 text-gray-300 hover:text-white w-full text-left justify-center lg:justify-start"
               >
                 <div className="bg-green-600 p-2 rounded-full transition-colors duration-300 group-hover:bg-green-700">
                   <FaEnvelope size={16} />
@@ -119,8 +119,8 @@ export default function Footer() {
                 </div>
               </button>
 
-              {/* Lokacija */}
-              <div className="flex items-center space-x-3 text-gray-300">
+              {/* Lokacija (dodata za bolju simetriju) */}
+              <div className="flex items-center space-x-3 text-gray-300 justify-center lg:justify-start">
                 <div className="bg-red-600 p-2 rounded-full">
                   <FaMapMarkerAlt size={16} />
                 </div>
@@ -131,73 +131,13 @@ export default function Footer() {
               </div>
             </div>
           </div>
-
-          {/* Radno vreme */}
-          <div>
-            <h4 className="text-lg font-semibold mb-6">
-              {t('footer.workingHours')}
-            </h4>
-            <div className="space-y-2 text-gray-300">
-              <div className="flex justify-between">
-                <span>
-                  {t('footer.weekdays')}
-                </span>
-                <span className="font-medium">08:00 - 20:00</span>
-              </div>
-              <div className="flex justify-between">
-                <span>
-                  {t('footer.saturday')}
-                </span>
-                <span className="font-medium">09:00 - 18:00</span>
-              </div>
-              <div className="flex justify-between">
-                <span>
-                  {t('footer.sunday')}
-                </span>
-                <span className="font-medium">10:00 - 16:00</span>
-              </div>
-            </div>
-            
-            {/* Hitni termini */}
-            <div className="mt-6 p-4 bg-gray-800 rounded-lg">
-              <p className="text-sm text-center text-gray-300">
-                📸 <strong className="text-white">{t('footer.emergency')}</strong>
-              </p>
-            </div>
-          </div>
         </div>
-      </div>
 
-      {/* Donji deo footera */}
-      <div className="border-t border-gray-700">
-        <div className="container mx-auto px-6 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">
-              &copy; 2024 {t('footer.brand')}. {t('footer.rights')}
-            </p>
-            
-            {/* Dodatni linkovi */}
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <a 
-                href="/privacy" 
-                className="transition-all duration-300 transform hover:scale-105 text-gray-400 hover:text-white text-sm"
-              >
-                {t('footer.privacy')}
-              </a>
-              <a 
-                href="/terms" 
-                className="transition-all duration-300 transform hover:scale-105 text-gray-400 hover:text-white text-sm"
-              >
-                {t('footer.terms')}
-              </a>
-              <a 
-                href="/sitemap" 
-                className="transition-all duration-300 transform hover:scale-105 text-gray-400 hover:text-white text-sm"
-              >
-                {t('footer.sitemap')}
-              </a>
-            </div>
-          </div>
+        {/* Donji deo footera - Copyright */}
+        <div className="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p className="text-gray-400 text-sm">
+            © {new Date().getFullYear()} {t('footer.brand')}. {t('footer.rights')}.
+          </p>
         </div>
       </div>
     </footer>

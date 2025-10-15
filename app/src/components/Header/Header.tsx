@@ -14,6 +14,7 @@ import {
   FaGlobe 
 } from 'react-icons/fa'
 import { useLanguage } from '@/app/contexts/LanguageContext'
+import Image from 'next/image'
 
 export default function Header() {
   const pathname = usePathname()
@@ -24,39 +25,124 @@ export default function Header() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const closeMenu = () => setIsMenuOpen(false)
 
+  // Proveri da li smo na početnoj stranici
+  const isHomePage = pathname === '/'
+
   const languages = [
     { code: 'sr', name: 'Srpski', flag: '🇷🇸' },
     { code: 'en', name: 'English', flag: '🇺🇸' },
     { code: 'de', name: 'Deutsch', flag: '🇩🇪' }
   ]
 
-  const navLinks = [
+  // Linkovi sa LEVE strane
+  const leftNavLinks = [
     { href: '/', label: t('nav.home'), icon: FaHome, active: pathname === '/' },
     { href: '/gallery', label: t('nav.gallery'), icon: FaImages, active: pathname === '/gallery' },
-    // { href: '/about', label: t('nav.about'), icon: FaUser, active: pathname === '/about' },
-    // { href: '/contact', label: t('nav.contact'), icon: FaEnvelope, active: pathname === '/contact' }
   ]
 
-  return (
-    <header className="bg-white shadow-sm border-b border-gray-200">
-      <nav className="container mx-auto px-6 py-4">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3" onClick={closeMenu}>
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-              F
-            </div>
-            <span className="text-xl font-bold text-gray-800 hidden sm:block">
-              {t('footer.brand')}
-            </span>
-          </Link>
+  // Linkovi sa DESNE strane
+  const rightNavLinks = [
+    { href: '/about', label: t('nav.about'), icon: FaUser, active: pathname === '/about' },
+    { href: '/contact', label: t('nav.contact'), icon: FaEnvelope, active: pathname === '/contact' }
+  ]
 
+  // Dinamičke klase bazirane na ruti
+  const headerClasses = isHomePage 
+    ? "bg-transparent absolute top-0 left-0 right-0 z-50" 
+    : "bg-white shadow-sm border-b border-gray-200"
+
+  const textColorClasses = isHomePage 
+    ? "text-white hover:text-gray-200" 
+    : "text-gray-600 hover:text-blue-500"
+
+  const activeTextColorClasses = isHomePage 
+    ? "text-white font-semibold" 
+    : "text-blue-600 font-semibold"
+
+  const hamburgerColor = isHomePage ? "bg-white" : "bg-gray-600"
+  const mobileMenuBorder = isHomePage ? "border-t border-white/30" : "border-t border-gray-200"
+
+  return (
+    <header className={headerClasses}>
+      <nav className="container mx-auto items-center">
+        <div className="flex items-center space-x-20 justify-center">
+          
+          {/* LEVA STRANA */}
+          <div className="hidden md:flex space-x-6">
+            {leftNavLinks.map((link) => {
+              const IconComponent = link.icon
+              return (
+                <Link 
+                  key={link.href}
+                  href={link.href} 
+                  className={`nav-link flex items-center space-x-2 ${
+                    link.active 
+                      ? activeTextColorClasses 
+                      : textColorClasses
+                  }`}
+                >
+                  <IconComponent size={16} />
+                  <span>{link.label}</span>
+                </Link>
+              )
+            })}
+          </div>
+
+          {/* SREDINA - Logo (POVEĆAN) */}
+          <div className="flex justify-center">
+            <Link 
+              href="/" 
+              className="flex items-center"
+              onClick={closeMenu}
+            >
+              <div className="relative w-[100px] h-[100px]"> {/* POVEĆANO SA 50px NA 80px */}
+                <Image
+                  src="/images/hero/logo.png"
+                  alt="Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              {/* Tekst pored loga (opciono) - možeš dodati ako želiš */}
+              {/* <span className="text-xl font-bold text-gray-800 ml-3 hidden sm:block">
+                {t('footer.brand')}
+              </span> */}
+            </Link>
+          </div>
+
+          {/* DESNA STRANA */}
           <div className="flex items-center space-x-4">
+            {/* Desktop navigacija - desni linkovi */}
+            <div className="hidden md:flex space-x-6">
+              {rightNavLinks.map((link) => {
+                const IconComponent = link.icon
+                return (
+                  <Link 
+                    key={link.href}
+                    href={link.href} 
+                    className={`nav-link flex items-center space-x-2 ${
+                      link.active 
+                        ? activeTextColorClasses 
+                        : textColorClasses
+                    }`}
+                  >
+                    <IconComponent size={16} />
+                    <span>{link.label}</span>
+                  </Link>
+                )
+              })}
+            </div>
+
             {/* Language Selector */}
             <div className="relative">
               <button
                 onClick={() => setIsLanguageOpen(!isLanguageOpen)}
-                className="flex items-center space-x-2 text-gray-600 hover:text-blue-500 transition-colors p-2 rounded-lg hover:bg-gray-100"
+                className={`flex items-center space-x-2 transition-colors p-2 rounded-lg hover:bg-gray-100 ${
+                  isHomePage 
+                    ? "text-white hover:text-gray-200 hover:bg-white/10" 
+                    : "text-gray-600 hover:text-blue-500"
+                }`}
               >
                 <FaGlobe size={16} />
                 <span className="hidden sm:inline">{language.toUpperCase()}</span>
@@ -83,42 +169,21 @@ export default function Header() {
               )}
             </div>
 
-            {/* Desktop Navigacija */}
-            <div className="hidden md:flex space-x-6">
-              {navLinks.map((link) => {
-                const IconComponent = link.icon
-                return (
-                  <Link 
-                    key={link.href}
-                    href={link.href} 
-                    className={`nav-link flex items-center space-x-2 ${
-                      link.active 
-                        ? 'text-blue-600 font-semibold' 
-                        : 'text-gray-600 hover:text-blue-500'
-                    }`}
-                  >
-                    <IconComponent size={16} />
-                    <span>{link.label}</span>
-                  </Link>
-                )
-              })}
-            </div>
-
             {/* Hamburger Menu */}
             <button
               className="md:hidden flex flex-col space-y-1.5 w-6 h-6 focus:outline-none"
               onClick={toggleMenu}
               aria-label="Toggle menu"
             >
-              <span className={`block w-6 h-0.5 bg-gray-600 transition-all duration-300 ${
+              <span className={`block w-6 h-0.5 transition-all duration-300 ${
                 isMenuOpen ? 'rotate-45 translate-y-2' : ''
-              }`}></span>
-              <span className={`block w-6 h-0.5 bg-gray-600 transition-all duration-300 ${
+              } ${hamburgerColor}`}></span>
+              <span className={`block w-6 h-0.5 transition-all duration-300 ${
                 isMenuOpen ? 'opacity-0' : 'opacity-100'
-              }`}></span>
-              <span className={`block w-6 h-0.5 bg-gray-600 transition-all duration-300 ${
+              } ${hamburgerColor}`}></span>
+              <span className={`block w-6 h-0.5 transition-all duration-300 ${
                 isMenuOpen ? '-rotate-45 -translate-y-2' : ''
-              }`}></span>
+              } ${hamburgerColor}`}></span>
             </button>
           </div>
         </div>
@@ -127,8 +192,8 @@ export default function Header() {
         <div className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
           isMenuOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
         }`}>
-          <div className="flex flex-col space-y-4 pb-4 border-t border-gray-200 pt-4">
-            {navLinks.map((link) => {
+          <div className={`flex flex-col space-y-4 pb-4 pt-4 ${mobileMenuBorder}`}>
+            {[...leftNavLinks, ...rightNavLinks].map((link) => {
               const IconComponent = link.icon
               return (
                 <Link 
@@ -136,8 +201,8 @@ export default function Header() {
                   href={link.href} 
                   className={`nav-link flex items-center space-x-3 text-lg ${
                     link.active 
-                      ? 'text-blue-600 font-semibold' 
-                      : 'text-gray-600 hover:text-blue-500'
+                      ? activeTextColorClasses 
+                      : textColorClasses
                   }`}
                   onClick={closeMenu}
                 >

@@ -1,19 +1,56 @@
 {
   "nav": {
     "home": "Početna",
-    "gallery": "Galerija", 
+    "gallery": "Portfolio",
     "about": "O Meni",
     "contact": "Kontakt"
   },
   "hero": {
-    "title": "Zamaram Trenutke",
-    "subtitle": "Stvaram Uspomene Koje Traju Zauvijek",
+    "title": "FOTO i VIDEO",
+    "subtitle": "Vaše uspomene, zauvek sačuvane",
     "description": "Profesionalna fotografija za sve vaše posebne trenutke. Portreti, venčanja, porodične sesije i još mnogo toga.",
     "galleryBtn": "Pogledaj Galeriju",
     "contactBtn": "Kontaktiraj Me"
   },
-"footer": {
-    "brand": "Fotograf",
+  "contact": {
+    "title": "Kontaktirajte Me",
+    "subtitle": "Spremni smo da odgovorimo na sva vaša pitanja i razgovaramo o vašem sledećem projektu",
+    "sendMessage": "Pošaljite Poruku",
+    "directContact": "Direktan Kontakt",
+    "followUs": "Pratite Nas",
+    "workingHours": "Radno Vreme",
+    "weekdays": "Ponedeljak - Petak",
+    "saturday": "Subota",
+    "sunday": "Nedelja",
+    "closed": "Zatvoreno",
+    "form": {
+      "name": "Ime i Prezime *",
+      "namePlaceholder": "Unesite vaše ime i prezime",
+      "email": "Email Adresa *",
+      "emailPlaceholder": "unesite@email.com",
+      "phone": "Broj Telefona",
+      "phonePlaceholder": "+381 64 123 4567",
+      "message": "Poruka *",
+      "messagePlaceholder": "Opišite vaš projekt ili pitanje...",
+      "sending": "Slanje...",
+      "sendButton": "Pošalji Poruku"
+    },
+    "info": {
+      "callUs": "Pozovite nas",
+      "sendEmail": "Pošaljite email",
+      "location": "Lokacija"
+    },
+    "success": {
+      "title": "Hvala Vam!",
+      "message": "Vaša poruka je uspešno poslata. Kontaktiraću Vas u najkraćem mogućem roku."
+    },
+    "error": {
+      "title": "Greška",
+      "message": "Došlo je do greške pri slanju poruke. Molimo pokušajte ponovo."
+    }
+  },
+  "footer": {
+    "brand": "Jolline Digitalart",
     "description": "Profesionalna fotografija koja hvata suštinu trenutka. Specijalizovan za venčanja, portrete i prirodne scenere.",
     "quickContact": "Brzi Kontakt",
     "callUs": "Pozovite nas",
@@ -29,5 +66,4 @@
     "terms": "Uslovi Korišćenja",
     "sitemap": "Mapa Sajta"
   }
-
 }

@@ -1,9 +1,10 @@
-// components/ContactModal.tsx - FINALNA VERZIJA
+// components/ContactModal.tsx - AŽURIRANA VERZIJA SA PREVODIMA
 'use client'
 
 import { useState, useRef } from 'react'
 import { FaTimes, FaPhone, FaEnvelope, FaMapMarkerAlt, FaInstagram, FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa'
 import emailjs from '@emailjs/browser'
+import { useLanguage } from '@/app/contexts/LanguageContext'
 
 interface ContactModalProps {
   isOpen: boolean
@@ -12,6 +13,8 @@ interface ContactModalProps {
 
 export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const formRef = useRef<HTMLFormElement>(null)
+  const { language, t } = useLanguage()
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -52,7 +55,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       }
     } catch (error) {
       console.error('Email sending failed:', error)
-      setError('Došlo je do greške pri slanju poruke. Molimo pokušajte ponovo.')
+      setError(t('contact.error.message'))
     } finally {
       setIsSubmitting(false)
     }
@@ -73,6 +76,13 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     { icon: FaLinkedin, url: 'https://linkedin.com', color: 'hover:text-blue-700' }
   ]
 
+  // Lokacije na različitim jezicima
+  const locationText = {
+    en: 'Belgrade, Serbia',
+    de: 'Belgrad, Serbien', 
+    sr: 'Beograd, Srbija'
+  }
+
   if (!isOpen) return null
 
   return (
@@ -80,7 +90,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex justify-between items-center p-6 border-b border-gray-200">
-          <h2 className="text-2xl font-bold text-gray-800">Kontaktirajte Me</h2>
+          <h2 className="text-2xl font-bold text-gray-800">{t('contact.title')}</h2>
           <button
             onClick={handleClose}
             className="text-gray-500 hover:text-gray-700 transition-colors"
@@ -118,7 +128,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               </div>
               <div className="ml-3">
                 <p className="text-sm text-green-700">
-                  ✅ Hvala Vam! Vaša poruka je uspešno poslata. Kontaktiraću Vas u najkraćem mogućem roku.
+                  ✅ {t('contact.success.message')}
                 </p>
               </div>
             </div>
@@ -129,11 +139,11 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Kontakt Forma */}
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-gray-800">Pošaljite Poruku</h3>
+              <h3 className="text-lg font-semibold mb-4 text-gray-800">{t('contact.sendMessage')}</h3>
               <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                    Ime i Prezime *
+                    {t('contact.form.name')}
                   </label>
                   <input
                     type="text"
@@ -143,13 +153,13 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     value={formData.name}
                     onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    placeholder="Unesite vaše ime i prezime"
+                    placeholder={t('contact.form.namePlaceholder')}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                    Email Adresa *
+                    {t('contact.form.email')}
                   </label>
                   <input
                     type="email"
@@ -159,13 +169,13 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     value={formData.email}
                     onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    placeholder="unesite@email.com"
+                    placeholder={t('contact.form.emailPlaceholder')}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                    Broj Telefona
+                    {t('contact.form.phone')}
                   </label>
                   <input
                     type="tel"
@@ -174,13 +184,13 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     value={formData.phone}
                     onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    placeholder="+381 64 123 4567"
+                    placeholder={t('contact.form.phonePlaceholder')}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                    Poruka *
+                    {t('contact.form.message')}
                   </label>
                   <textarea
                     id="message"
@@ -190,7 +200,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     value={formData.message}
                     onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    placeholder="Opišite vaš projekt ili pitanje..."
+                    placeholder={t('contact.form.messagePlaceholder')}
                   />
                 </div>
 
@@ -205,10 +215,10 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
-                      Slanje...
+                      {t('contact.form.sending')}
                     </>
                   ) : (
-                    'Pošalji Poruku'
+                    t('contact.form.sendButton')
                   )}
                 </button>
               </form>
@@ -216,7 +226,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
             {/* Kontakt Informacije */}
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-gray-800">Direktan Kontakt</h3>
+              <h3 className="text-lg font-semibold mb-4 text-gray-800">{t('contact.directContact')}</h3>
               <div className="space-y-4">
                 {/* Telefon */}
                 <div className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
@@ -224,7 +234,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     <FaPhone className="text-white text-sm" />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-800">Pozovite nas</p>
+                    <p className="font-medium text-gray-800">{t('contact.info.callUs')}</p>
                     <a href="tel:+381641234567" className="text-blue-600 hover:text-blue-700">
                       +381 64 123 4567
                     </a>
@@ -237,7 +247,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     <FaEnvelope className="text-white text-sm" />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-800">Pošaljite email</p>
+                    <p className="font-medium text-gray-800">{t('contact.info.sendEmail')}</p>
                     <a href="mailto:fotograf@example.com" className="text-green-600 hover:text-green-700">
                       fotograf@example.com
                     </a>
@@ -250,14 +260,16 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     <FaMapMarkerAlt className="text-white text-sm" />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-800">Lokacija</p>
-                    <p className="text-gray-600">Beograd, Srbija</p>
+                    <p className="font-medium text-gray-800">{t('contact.info.location')}</p>
+                    <p className="text-gray-600">
+                      {locationText[language as keyof typeof locationText]}
+                    </p>
                   </div>
                 </div>
 
                 {/* Društvene mreže */}
                 <div className="pt-4">
-                  <h4 className="font-semibold mb-3 text-gray-800">Pratite nas</h4>
+                  <h4 className="font-semibold mb-3 text-gray-800">{t('contact.followUs')}</h4>
                   <div className="flex space-x-3">
                     {socialLinks.map((social, index) => {
                       const IconComponent = social.icon

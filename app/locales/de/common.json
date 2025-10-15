@@ -1,31 +1,68 @@
 {
   "nav": {
     "home": "Startseite",
-    "gallery": "Galerie",
+    "gallery": "Portfolio",
     "about": "Über Mich",
     "contact": "Kontakt"
   },
   "hero": {
-    "title": "Momente Einfangen",
-    "subtitle": "Erinnerungen Schaffen, Die Ewig Halten",
-    "description": "Professionelle Fotografie für all Ihre besonderen Momente. Porträts, Hochzeiten, Familiensessions und vieles mehr.",
+    "title": "FOTO und VIDEO",
+    "subtitle": "Ihre Erinnerungen, für immer bewahrt",
+    "description": "Professionelle Fotografie für alle Ihre besonderen Momente. Porträts, Hochzeiten, Familiensessions und vieles mehr.",
     "galleryBtn": "Galerie Ansehen",
     "contactBtn": "Kontaktieren Sie Mich"
   },
+  "contact": {
+    "title": "Kontaktieren Sie Mich",
+    "subtitle": "Bereit, alle Ihre Fragen zu beantworten und Ihr nächstes Projekt zu besprechen",
+    "sendMessage": "Nachricht Senden",
+    "directContact": "Direkter Kontakt",
+    "followUs": "Folgen Sie Uns",
+    "workingHours": "Öffnungszeiten",
+    "weekdays": "Montag - Freitag",
+    "saturday": "Samstag",
+    "sunday": "Sonntag",
+    "closed": "Geschlossen",
+    "form": {
+      "name": "Vor- und Nachname *",
+      "namePlaceholder": "Geben Sie Ihren vollständigen Namen ein",
+      "email": "E-Mail-Adresse *",
+      "emailPlaceholder": "ihre@email.de",
+      "phone": "Telefonnummer",
+      "phonePlaceholder": "+49 123 456 789",
+      "message": "Nachricht *",
+      "messagePlaceholder": "Beschreiben Sie Ihr Projekt oder Ihre Frage...",
+      "sending": "Wird gesendet...",
+      "sendButton": "Nachricht Senden"
+    },
+    "info": {
+      "callUs": "Rufen Sie uns an",
+      "sendEmail": "E-Mail senden",
+      "location": "Standort"
+    },
+    "success": {
+      "title": "Vielen Dank!",
+      "message": "Ihre Nachricht wurde erfolgreich gesendet. Ich werde Sie so schnell wie möglich kontaktieren."
+    },
+    "error": {
+      "title": "Fehler",
+      "message": "Beim Senden der Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+    }
+  },
   "footer": {
-    "brand": "Fotograf",
-    "description": "Professionelle Fotografie, die den Moment einfängt. Spezialisiert auf Hochzeiten, Porträts und Naturaufnahmen.",
+    "brand": "Jolline Digitalart",
+    "description": "Professionelle Fotografie, die den Moment einfängt. Spezialisiert auf Hochzeiten, Porträts und Naturlandschaften.",
     "quickContact": "Schneller Kontakt",
     "callUs": "Rufen Sie uns an",
-    "sendEmail": "E-Mail Senden",
-    "location": "Standort", 
+    "sendEmail": "E-Mail senden",
+    "location": "Standort",
     "workingHours": "Öffnungszeiten",
     "weekdays": "Montag - Freitag",
     "saturday": "Samstag",
     "sunday": "Sonntag",
     "emergency": "Notfalltermine auf Anfrage verfügbar",
     "rights": "Alle Rechte vorbehalten",
-    "privacy": "Datenschutzrichtlinie",
+    "privacy": "Datenschutz",
     "terms": "Nutzungsbedingungen",
     "sitemap": "Sitemap"
   }

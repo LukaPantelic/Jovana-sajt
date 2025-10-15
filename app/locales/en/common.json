@@ -1,19 +1,56 @@
 {
   "nav": {
     "home": "Home",
-    "gallery": "Gallery",
-    "about": "About Me", 
+    "gallery": "Portfolio",
+    "about": "About Me",
     "contact": "Contact"
   },
   "hero": {
-    "title": "Capture Moments",
-    "subtitle": "Create Memories That Last Forever",
+    "title": "PHOTO and VIDEO",
+    "subtitle": "Your memories, forever preserved",
     "description": "Professional photography for all your special moments. Portraits, weddings, family sessions and much more.",
     "galleryBtn": "View Gallery",
     "contactBtn": "Contact Me"
   },
+  "contact": {
+    "title": "Contact Me",
+    "subtitle": "Ready to answer all your questions and discuss your next project",
+    "sendMessage": "Send Message",
+    "directContact": "Direct Contact",
+    "followUs": "Follow Us",
+    "workingHours": "Working Hours",
+    "weekdays": "Monday - Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "closed": "Closed",
+    "form": {
+      "name": "Full Name *",
+      "namePlaceholder": "Enter your full name",
+      "email": "Email Address *",
+      "emailPlaceholder": "your@email.com",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+381 64 123 4567",
+      "message": "Message *",
+      "messagePlaceholder": "Describe your project or question...",
+      "sending": "Sending...",
+      "sendButton": "Send Message"
+    },
+    "info": {
+      "callUs": "Call us",
+      "sendEmail": "Send email",
+      "location": "Location"
+    },
+    "success": {
+      "title": "Thank You!",
+      "message": "Your message has been sent successfully. I will contact you as soon as possible."
+    },
+    "error": {
+      "title": "Error",
+      "message": "An error occurred while sending the message. Please try again."
+    }
+  },
   "footer": {
-    "brand": "Photographer",
+    "brand": "Jolline Digitalart",
     "description": "Professional photography that captures the essence of the moment. Specialized in weddings, portraits and natural scenery.",
     "quickContact": "Quick Contact",
     "callUs": "Call Us",
@@ -21,7 +58,7 @@
     "location": "Location",
     "workingHours": "Working Hours",
     "weekdays": "Monday - Friday",
-    "saturday": "Saturday", 
+    "saturday": "Saturday",
     "sunday": "Sunday",
     "emergency": "Emergency appointments available upon request",
     "rights": "All rights reserved",

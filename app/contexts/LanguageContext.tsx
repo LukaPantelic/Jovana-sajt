@@ -21,7 +21,7 @@ const translations: Record<Language, any> = {
 }
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>('sr')
+  const [language, setLanguage] = useState<Language>('de')
 
   // Učitaj jezik iz localStorage pri učitavanju
   useEffect(() => {
