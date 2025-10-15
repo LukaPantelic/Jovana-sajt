@@ -9,12 +9,25 @@ import {
   FaImages, 
   FaUser, 
   FaEnvelope,
-  FaBars,
-  FaTimes,
   FaGlobe 
 } from 'react-icons/fa'
 import { useLanguage } from '@/app/contexts/LanguageContext'
 import Image from 'next/image'
+
+// Tip za jezik
+interface LanguageOption {
+  code: 'sr' | 'en' | 'de'
+  name: string
+  flag: string
+}
+
+// Tip za navigacioni link
+interface NavLink {
+  href: string
+  label: string
+  icon: React.ComponentType<{ size?: number }>
+  active: boolean
+}
 
 export default function Header() {
   const pathname = usePathname()
@@ -28,20 +41,20 @@ export default function Header() {
   // Proveri da li smo na početnoj stranici
   const isHomePage = pathname === '/'
 
-  const languages = [
+  const languages: LanguageOption[] = [
     { code: 'sr', name: 'Srpski', flag: '🇷🇸' },
     { code: 'en', name: 'English', flag: '🇺🇸' },
     { code: 'de', name: 'Deutsch', flag: '🇩🇪' }
   ]
 
   // Linkovi sa LEVE strane
-  const leftNavLinks = [
+  const leftNavLinks: NavLink[] = [
     { href: '/', label: t('nav.home'), icon: FaHome, active: pathname === '/' },
     { href: '/gallery', label: t('nav.gallery'), icon: FaImages, active: pathname === '/gallery' },
   ]
 
   // Linkovi sa DESNE strane
-  const rightNavLinks = [
+  const rightNavLinks: NavLink[] = [
     { href: '/about', label: t('nav.about'), icon: FaUser, active: pathname === '/about' },
     { href: '/contact', label: t('nav.contact'), icon: FaEnvelope, active: pathname === '/contact' }
   ]
@@ -88,14 +101,14 @@ export default function Header() {
             })}
           </div>
 
-          {/* SREDINA - Logo (POVEĆAN) */}
+          {/* SREDINA - Logo */}
           <div className="flex justify-center">
             <Link 
               href="/" 
               className="flex items-center"
               onClick={closeMenu}
             >
-              <div className="relative w-[100px] h-[100px]"> {/* POVEĆANO SA 50px NA 80px */}
+              <div className="relative w-[100px] h-[100px]">
                 <Image
                   src="/images/hero/logo.png"
                   alt="Logo"
@@ -104,10 +117,6 @@ export default function Header() {
                   priority
                 />
               </div>
-              {/* Tekst pored loga (opciono) - možeš dodati ako želiš */}
-              {/* <span className="text-xl font-bold text-gray-800 ml-3 hidden sm:block">
-                {t('footer.brand')}
-              </span> */}
             </Link>
           </div>
 
@@ -154,7 +163,7 @@ export default function Header() {
                     <button
                       key={lang.code}
                       onClick={() => {
-                        setLanguage(lang.code as any)
+                        setLanguage(lang.code)
                         setIsLanguageOpen(false)
                       }}
                       className={`flex items-center space-x-3 w-full px-4 py-3 text-left hover:bg-gray-50 transition-colors ${

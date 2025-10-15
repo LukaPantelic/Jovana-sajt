@@ -1,9 +1,19 @@
 // contexts/LanguageContext.tsx
 'use client'
 
-import React, { createContext, useContext, useState, useEffect } from 'react'
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 
+// Uvoz prevoda koristeći ES6 import
+import commonSR from '../locales/sr/common.json'
+import commonEN from '../locales/en/common.json'
+import commonDE from '../locales/de/common.json'
+
+// Tipovi
 type Language = 'sr' | 'en' | 'de'
+
+// Manje striktan tip za prevode
+type TranslationValue = string | { [key: string]: TranslationValue }
+type Translations = Record<string, TranslationValue>
 
 interface LanguageContextType {
   language: Language
@@ -13,20 +23,24 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
-// Učitaj prevode
-const translations: Record<Language, any> = {
-  sr: require('../locales/sr/common.json'),
-  en: require('../locales/en/common.json'),
-  de: require('../locales/de/common.json')
+// Mapiranje jezika na prevode
+const translations: Record<Language, Translations> = {
+  sr: commonSR,
+  en: commonEN,
+  de: commonDE
 }
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
+interface LanguageProviderProps {
+  children: ReactNode
+}
+
+export function LanguageProvider({ children }: LanguageProviderProps) {
   const [language, setLanguage] = useState<Language>('de')
 
   // Učitaj jezik iz localStorage pri učitavanju
   useEffect(() => {
     const savedLanguage = localStorage.getItem('language') as Language
-    if (savedLanguage && ['sr', 'en', 'de'].includes(savedLanguage)) {
+    if (savedLanguage && (savedLanguage === 'sr' || savedLanguage === 'en' || savedLanguage === 'de')) {
       setLanguage(savedLanguage)
     }
   }, [])
@@ -36,16 +50,24 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('language', language)
   }, [language])
 
-  // Funkcija za prevod
+  // Rekurzivna funkcija za prevod
   const t = (key: string): string => {
     const keys = key.split('.')
-    let value: any = translations[language]
     
-    for (const k of keys) {
-      value = value?.[k]
+    const getNestedValue = (obj: TranslationValue, keyParts: string[]): string => {
+      if (keyParts.length === 0) {
+        return typeof obj === 'string' ? obj : key
+      }
+      
+      const currentKey = keyParts[0]
+      if (typeof obj === 'object' && obj !== null && currentKey in obj) {
+        return getNestedValue(obj[currentKey], keyParts.slice(1))
+      }
+      
+      return key
     }
     
-    return value || key // Vrati key ako prevod ne postoji
+    return getNestedValue(translations[language], keys)
   }
 
   return (

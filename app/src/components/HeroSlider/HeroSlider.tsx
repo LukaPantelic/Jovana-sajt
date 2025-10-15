@@ -2,11 +2,17 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
+import Image from 'next/image'
 import ContactModal from '../ContactModal/ContactModal'
 import { useLanguage } from '@/app/contexts/LanguageContext'
 
-const sliderImages = [
+interface SliderImage {
+  id: number
+  src: string
+  alt: string
+}
+
+const sliderImages: SliderImage[] = [
   {
     id: 1,
     src: "/images/hero/A_D_1.jpg",
@@ -75,10 +81,12 @@ export default function HeroSlider() {
               index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
             }`}
           >
-            <img
+            <Image
               src={image.src}
               alt={image.alt}
-              className="w-full h-full object-cover brightness-50"
+              fill
+              className="object-cover brightness-50"
+              priority={index === 0}
             />
           </div>
         ))}
@@ -95,16 +103,7 @@ export default function HeroSlider() {
             <p className="text-xl md:text-2xl mb-8">
               {t('hero.subtitle')}
             </p>
-            {/* <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto">
-              {t('hero.description')}
-            </p> */}
             <div className="space-x-4">
-              {/* <Link 
-                href="/gallery" 
-                className="bg-white text-gray-800 px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-lg inline-block"
-              >
-                {t('hero.galleryBtn')}
-              </Link> */}
               <button 
                 onClick={() => setIsModalOpen(true)}
                 className="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-gray-800 transition-colors font-semibold text-lg inline-block"
@@ -115,7 +114,7 @@ export default function HeroSlider() {
           </div>
         </div>
 
-        {/* Navigacione strelice - OVO JE BILO FALILO! */}
+        {/* Navigacione strelice */}
         <button
           onClick={prevSlide}
           className="absolute left-4 top-1/2 transform -translate-y-1/2 z-40 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-full transition-all hover:scale-110"
@@ -136,7 +135,7 @@ export default function HeroSlider() {
           </svg>
         </button>
 
-        {/* Tačkice - OVO JE BILO FALILO! */}
+        {/* Tačkice */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-40 flex space-x-3">
           {sliderImages.map((_, index) => (
             <button
